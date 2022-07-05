@@ -18,6 +18,39 @@ class Service{
             console.log({e})
         }
     }
+    getPlanets = async ()=>{
+
+            try{
+                const response = await API.get('/planets')
+                return response.data.results.map(this._transformPerson)
+            }catch(e){
+                console.log({e})
+            }
+    }
+    getPlanet = async(id)=>{
+        try{
+            const response = await API.get(`/planets/${id}`)
+            return this._transformPerson(response.data)
+        }catch(e){
+            console.log({e})
+        }
+    }
+    getStarship = async()=>{
+        try{
+            const response = await API.get('/starships')
+            return response.data.results.map(this._transformStarship)
+        }catch(e){
+            console.log({e})
+        }
+    }
+    getStarships = async (id)=>{
+        try{
+            const response = await API.get(`/starships/${id}`)
+            return response.data.results.map(this._transformStarship)
+        }catch(e){
+            console.log({e})
+        }
+    }
     _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
